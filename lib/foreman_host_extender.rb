@@ -1,4 +1,4 @@
-require 'foreman_column_view'
+require 'foreman_hosts_extender/engine'
 
 module ForemanHostExtender
 end
