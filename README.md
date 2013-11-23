@@ -1,6 +1,6 @@
 # foreman\_host\_extender
 
-A small plugin to extend [foreman_column_view](https://github.com/GregSutcliffe/foreman_column_view) by adding the ability to add items to the Host Edit page. By default the gem adds rack managment to Foreman but by alerting the included migration you could easily add any desired columns.
+A small plugin to extend [foreman_column_view](https://github.com/GregSutcliffe/foreman_column_view) by adding the ability to add items to the Host Edit page. By default the gem adds rack managment to Foreman but by altering the included migration you could easily add any desired columns.
 
 # Installation
 
