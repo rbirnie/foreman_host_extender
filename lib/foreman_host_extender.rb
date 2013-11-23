@@ -1,4 +1,4 @@
-require 'foreman_hosts_extender/engine'
+require 'foreman_host_extender/engine'
 
 module ForemanHostExtender
 end
