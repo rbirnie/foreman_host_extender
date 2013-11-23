@@ -21,5 +21,6 @@ Gem::Specification.new do |s|
   s.summary = "Extend Foreman's Host model"
 
   s.add_dependency "deface"
+  s.add_dependency "foreman_column_view"
 end
 

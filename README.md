@@ -1,12 +1,53 @@
 # foreman\_host\_extender
 
-A small plugin to extend [foreman_column_view](https://github.com/GregSutcliffe/foreman_column_view). Note that this is in active development and probably not worth using for a while. I created the repo more to easily move it between hosts. =D
+A small plugin to extend [foreman_column_view](https://github.com/GregSutcliffe/foreman_column_view) by adding the ability to add items to the Host Edit page. By default the gem adds rack managment to Foreman but by alerting the included migration you could easily add any desired columns.
 
 # Installation
 
+Require the both this gem and foreman_column_view in Foreman
+
+```yaml
+gem 'foreman_host_extender', :git => 'git://github.com/rbirnie/foreman_host_extender'
+gem 'foreman_column_view'
+```
+
+Update Foreman with the new gems:
+
+    bundle update foreman_column_view
+    bundle update foreman_host_extender
+
+From here you will either want to run the edit and run the included rake file.
+
 # Configuration
 
+This plugin uses the exact same yaml settings file as foreman_column_view but adds a new `:view:` switch called `:hosts_edit` to select Host Edit pages. The function of the `:after:` section has also been altered slightly to drop the new column into the requested settings page. To add the columns for rack management add the following to your foreman_column_view settings file:
+
+```yaml
+  :rack_view:
+    :title: Rack
+    :after: nt_drac
+    :content: rack
+    :view: :hosts_properties
+  :racku_edit:
+    :title: "racku"
+    :after: rack_view
+    :content: racku
+    :view: :hosts_properties
+  :rack_edit:
+    :title: rack
+    :after: info
+    :content: rack
+    :view: :hosts_edit
+  :racku_edit:
+    :title: "racku"
+    :after: info
+    :content: racku
+    :view: :hosts_edit
+```
+
 # TODO
+
+* Create generator for easily creating migrations.
 
 # Copyright
 
