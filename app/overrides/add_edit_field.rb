@@ -4,8 +4,8 @@ if SETTINGS[:column_view]
     Deface::Override.new(
       :virtual_path => "hosts/_form",
       :name => "edit_#{k}",
-      :insert_after => "div##{after}",
-      :text => "<%= text_f f, fcv_title('#{k}'), :class => "input-xlarge", :value => fcv_content(@host, '#{v}') %>"
+      :insert_bottom => "div##{after}",
+      :text => "<%= text_f f, fcv_title('#{k}'), :class => \"input-xlarge\", :value => fcv_content(@host, '#{k}') %>"
     )
   end
 end
