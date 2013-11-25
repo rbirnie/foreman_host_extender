@@ -4,13 +4,7 @@ A small plugin to extend [foreman_column_view](https://github.com/GregSutcliffe/
 
 # Installation
 
-First install `foreman_column_view` and get it working. Next require this gem in Foreman's `bundler.d/Gemfile.local.rb` file.
-
-```yaml
-gem 'foreman_host_extender'
-```
-
-Now we need to build this gem, since its not available online. First download the git repo.
+First we need to install `foreman_column_view` and get it working. Now we need to build this gem, since its not available online. First download the git repo.
 
 ```yaml
 cd ~
@@ -24,15 +18,27 @@ Now you can customize what you want to add to the database. Look at this tutoria
 vi db/migrate/20131121150500_add_rack_to_hosts.rb
 ```
 
-Finally we are ready to build our gem. Run `scl enable ruby193 bash` to jump into Foreman's ruby environment.
+We are now ready to build our gem. Run `scl enable ruby193 bash` to jump into Foreman's ruby environment.
 
 ```yaml
 scl enable ruby193 bash
 cd foreman_host_extender
 gem build foreman_host_extender.gemspec
 gem install --ignore-dependencies foreman_host_extender-0.2.1.gem
+```
+
+Next require this gem in Foreman's `bundler.d/Gemfile.local.rb` file (create it if it doesn't exist).
+
+```yaml
+gem 'foreman_host_extender'
+```
+
+Finally, run our migrations.
+
+```
 cd /usr/share/foreman
-rake db:migrate
+BUNDLE_GEMFILE=/usr/share/foreman/Gemfile.in bundle install
+rake RAILS_ENV=production db:migrate
 touch ~foreman/tmp/restart.txt
 ```
 
