@@ -7,5 +7,9 @@ module ForemanHostExtender
   #Thus, inhereits from ::Rails::Engine and not from Rails::Engine
   class Engine < ::Rails::Engine
 
+    initializer "foreman_host_extender.load_app_instance_data" do |app|
+      app.config.paths['db/migrate'] += ForemanHostExtender::Engine.paths['db/migrate'].existent
+    end
+
   end
 end

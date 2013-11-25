@@ -4,19 +4,37 @@ A small plugin to extend [foreman_column_view](https://github.com/GregSutcliffe/
 
 # Installation
 
-Require the both this gem and foreman_column_view in Foreman
+First install `foreman_column_view` and get it working. Next require this gem in Foreman's `bundler.d/Gemfile.local.rb` file.
 
 ```yaml
-gem 'foreman_host_extender', :git => 'git://github.com/rbirnie/foreman_host_extender'
-gem 'foreman_column_view'
+gem 'foreman_host_extender'
 ```
 
-Update Foreman with the new gems:
+Now we need to build this gem, since its not available online. First download the git repo.
 
-    bundle update foreman_column_view
-    bundle update foreman_host_extender
+```yaml
+cd ~
+git clone https://github.com/rbirnie/foreman_host_extender.git
+cd foreman_host_extender
+```
 
-From here you will either want to run the edit and run the included rake file.
+Now you can customize what you want to add to the database. Look at this tutorial for help [Active Record Migrations](http://guides.rubyonrails.org/migrations.html).
+
+```yaml
+vi db/migrate/20131121150500_add_rack_to_hosts.rb
+```
+
+Finally we are ready to build our gem. Run `scl enable ruby193 bash` to jump into Foreman's ruby environment.
+
+```yaml
+scl enable ruby193 bash
+cd foreman_host_extender
+gem build foreman_host_extender.gemspec
+gem install --ignore-dependencies foreman_host_extender-0.2.1.gem
+cd /usr/share/foreman
+rake db:migrate
+touch ~foreman/tmp/restart.txt
+```
 
 # Configuration
 
@@ -47,7 +65,7 @@ This plugin uses the exact same yaml settings file as foreman_column_view but ad
 
 # TODO
 
-* Create generator for easily creating migrations.
+* Create generator for easily adding migrations.
 
 # Copyright
 
